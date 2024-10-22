@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des étudiants</title>
+	<style>
+		body {
+		            font-family: Arial, sans-serif;
+		            margin: 20px;
+		            padding: 0;
+		        }
+		        
+		        h1 {
+		            text-align: center;
+		        }
+
+		        table {
+		            width: 100%;
+		            border-collapse: collapse; 
+		            margin-top: 20px; 
+		        }
+
+		        th, td {
+		            border: 1px solid #ddd; 
+		            padding: 8px; 
+		            text-align: left; 
+		        }
+
+		        th {
+		            background-color: #CBC3E3; 
+		            font-weight: bold; 
+		        }
+	    </style>
+</head>
+<body>
+    <h1>Liste des étudiants</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>CIN</th>
+                <th>Nom</th>
+                <th>Moyenne</th>
+				<th>Action 1</th>
+				<th>Action 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="etudiant : ${etudiants}">
+                <td th:text="${etudiant.cin}">CIN</td>
+                <td th:text="${etudiant.nom}">Nom</td>
+                <td th:text="${etudiant.moyenne}">Moyenne</td>
+				<td>
+				<a th:href="@{/supprimer(cin=${etudiant.cin})}" class="delete-link">Supprimer</a>
+				 </td>
+				 <td><a th:href="@{/modifier(cin=${etudiant.cin})}" class="modify-link">Modifier</a>
+				 	</td>
+            </tr>
+        </tbody>
+    </table>
+	<a href="/ajout">Ajouter un étudiant</a>
+</body>
+</html>

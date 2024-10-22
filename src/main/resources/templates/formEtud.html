@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${etudiant.cin != null} ? 'Modifier un étudiant' : 'Ajouter un étudiant'">Ajouter ou Modifier un étudiant</title>
+</head>
+<body>
+    <h1 th:text="${etudiant.cin != null} ? 'Modifier un étudiant' : 'Ajouter un étudiant'">Ajouter un étudiant</h1>
+    
+	<form th:action="@{/ajout}" th:object="${etudiant}" method="post">
+	    <div>
+	        <label>CIN:</label>
+	        <input type="text" th:field="*{cin}" required th:disabled="${etudiant.cin != null}" />
+	        <input type="hidden" th:field="*{cin}" /> 
+	    </div>
+	    <div>
+	        <label>Nom:</label>
+	        <input type="text" th:field="*{nom}" required />
+	    </div>
+	    <div>
+	        <label>Moyenne:</label>
+	        <input type="number" th:field="*{moyenne}" step="0.01" required />
+	    </div>
+	    <div>
+	        <label>Mot de passe:</label>
+	        <input type="password" th:field="*{motDePasse}" required th:hidden="${etudiant.cin != null}" />
+			<input type="hidden" th:field="*{motDePasse}" />
+	    </div>
+	    <div>
+	        <button type="submit" th:text="${etudiant.cin != null} ? 'Modifier' : 'Ajouter'">Ajouter l'étudiant</button>
+	    </div>
+	</form>
+</body>
+</html>
